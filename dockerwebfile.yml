@@ -1,7 +1,7 @@
 ---
 -
     name: this is the first docker installation
-    hosts: "ansibleworker"
+    hosts: "all"
 
 
     tasks:
