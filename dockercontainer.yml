@@ -1,0 +1,14 @@
+---
+- name: playbook for container test
+  hosts: "ansibleworker"
+
+  tasks:
+    - name: pulling the image
+      command: "docker image pull pareshsharma11/pareshimage:v1"
+    - name: container creation
+      command: "docker container run -itd --name=webtest -p 82:80 pareshsharma11/pareshimage:v1"
+    - name: list of containers
+      command: "docker container ls -a"
+      register: containeroutput
+    - name: container list output liek echo
+      debug: var=containeroutput

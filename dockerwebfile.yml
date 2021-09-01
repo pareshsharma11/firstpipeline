@@ -1,0 +1,44 @@
+---
+-
+    name: this is the first docker installation
+    hosts: "ansibleworker"
+
+
+    tasks:
+      -
+        name: uninstalling docker
+        yum:
+          name:
+           - docker
+           - docker-client
+           - docker-client-latest
+           - docker-common
+           - docker-latest
+           - docker-latest-logrotate
+           - docker-logrotate
+           - docker-engine
+          state: absent
+      -
+        name: installing yum utils
+        yum:
+          name: yum-utils
+          state: present
+      -
+        name: Add repository
+        get_url:
+          dest: /etc/yum.repos.d/docker_ce.repo
+          url: https://download.docker.com/linux/centos/docker-ce.repo
+      -
+        name: installing docker
+        yum:
+          name:
+            - docker-ce
+            - docker-ce-cli
+            - containerd.io
+        ignore_errors: true
+      -
+        name: starting service docker
+        service:
+          name: docker
+          state: started
+          enabled: yes
