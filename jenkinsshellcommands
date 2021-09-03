@@ -1,0 +1,16 @@
+
+//Shell 1
+sudo echo "## starting the docker installation with playbook"
+sudo ansible-playbook dockerwebfile.yml
+
+//Shell 2
+sudo echo "### builin the custom paresh image ###"
+sudo docker image build -t pareshsharma11/pareshimage:v1 .
+sudo docker login -u pareshsharma11 -p MyDocker@12
+sudo docker image push pareshsharma11/pareshimage:v1
+sudo sleep 10
+
+//Shell 3
+sudo echo "## create container###"
+sudo ansible-playbook dockercontainer.yml
+sudo sleep 10
